@@ -1,7 +1,7 @@
-import { Functions } from './stacks/Functions'
-import { Database } from './stacks/Database'
-import { Web } from './stacks/Web'
-import { SSTConfig } from 'sst'
+import { Functions } from "./stacks/Functions";
+import { Database } from "./stacks/Database";
+import { Web } from "./stacks/Web";
+import { SSTConfig } from "sst";
 
 /*
   TODO:
@@ -9,16 +9,16 @@ import { SSTConfig } from 'sst'
 
 */
 
-export const region = 'us-east-1'
+export const region = "us-east-2";
 
 export default {
   config(_input) {
     return {
-      name: 'sst-template2',
+      name: "sst-template2",
       region,
-    }
+    };
   },
   stacks(app) {
-    app.stack(Database).stack(Web).stack(Functions)
+    app.stack(Database).stack(Web).stack(Functions);
   },
-} satisfies SSTConfig
+} satisfies SSTConfig;

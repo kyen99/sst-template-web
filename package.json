@@ -13,11 +13,11 @@
     "load-env": "for i in $(cat .env.prod); do echo $i; export $i; done"
   },
   "devDependencies": {
-    "@tsconfig/node18": "^18.2.1",
-    "@types/node": "18",
-    "aws-cdk-lib": "2.91.0",
+    "@tsconfig/node18": "^18.2.2",
+    "@types/node": "^18.17.18",
+    "aws-cdk-lib": "2.95.1",
     "constructs": "10.2.69",
-    "sst": "^2.24.27",
+    "sst": "^2.25.6",
     "typescript": "^5.2.2"
   },
   "workspaces": [
