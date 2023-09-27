@@ -1,5 +1,5 @@
 import { StackContext, RDS, Config } from 'sst/constructs'
-// import * as ec2 from 'aws-cdk-lib/aws-ec2'
+import * as ec2 from 'aws-cdk-lib/aws-ec2'
 
 /*
   TODO:
@@ -11,7 +11,7 @@ import { StackContext, RDS, Config } from 'sst/constructs'
 export const Database = ({ stack }: StackContext) => {
   const cluster = new RDS(stack, 'db', {
     engine: 'postgresql13.9',
-    defaultDatabaseName: 'data1',
+    defaultDatabaseName: 'postgres',
   })
   stack.addOutputs({
     dbName: cluster.defaultDatabaseName,

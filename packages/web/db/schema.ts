@@ -1,4 +1,3 @@
-import type { AdapterAccount } from '@auth/core/adapters'
 import {
   timestamp,
   pgTable,
@@ -6,11 +5,7 @@ import {
   primaryKey,
   integer,
 } from 'drizzle-orm/pg-core'
-
-/*
-  Next Auth requires: user, account, sessions and verificationTokens tables
-
-*/
+import type { AdapterAccount } from '@auth/core/adapters'
 
 export const users = pgTable('user', {
   id: text('id').notNull().primaryKey(),
@@ -39,7 +34,7 @@ export const accounts = pgTable(
   },
   (account) => ({
     compoundKey: primaryKey(account.provider, account.providerAccountId),
-  })
+  }),
 )
 
 export const sessions = pgTable('session', {
@@ -59,5 +54,5 @@ export const verificationTokens = pgTable(
   },
   (vt) => ({
     compoundKey: primaryKey(vt.identifier, vt.token),
-  })
+  }),
 )

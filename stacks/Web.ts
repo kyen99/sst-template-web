@@ -9,28 +9,26 @@ import { Database } from './Database'
 */
 
 const CUSTOM_DOMAIN: SsrDomainProps = {
-  domainName: 'demo.purplesquirrel.io',
-  hostedZone: 'purplesquirrel.io',
+  domainName: 'demo.2401.co',
+  hostedZone: '2401.co',
 }
 
 export function Web({ stack }: StackContext) {
-  const GOOGLE_CLIENT_ID = new Config.Secret(stack, 'GOOGLE_CLIENT_ID')
-  const GOOGLE_CLIENT_SECRET = new Config.Secret(stack, 'GOOGLE_CLIENT_SECRET')
   const NEXTAUTH_SECRET = new Config.Secret(stack, 'NEXTAUTH_SECRET')
   const SITE_URL = new Config.Secret(stack, 'SITE_URL')
-  const web = [
-    GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET,
-    NEXTAUTH_SECRET,
-    SITE_URL,
-  ]
+  const SMTP_HOST = new Config.Secret(stack, 'SMTP_HOST')
+  const SMTP_PORT = new Config.Secret(stack, 'SMTP_PORT')
+  const SMTP_USER = new Config.Secret(stack, 'SMTP_USER')
+  const SMTP_PASS = new Config.Secret(stack, 'SMTP_PASS')
+  const email = [SMTP_HOST, SMTP_PASS, SMTP_PORT, SMTP_USER]
+  const web = [NEXTAUTH_SECRET, SITE_URL]
 
   const { cluster } = use(Database)
   const { defaultDatabaseName: dbName, secretArn, clusterArn } = cluster
   const site = new NextjsSite(stack, 'site', {
     customDomain: stack.stage === 'prod' ? CUSTOM_DOMAIN : undefined,
     path: 'packages/web',
-    bind: [...web],
+    bind: [...web, ...email, cluster],
     environment: {
       NEXTAUTH_URL:
         stack.stage === 'prod'

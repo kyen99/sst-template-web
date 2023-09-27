@@ -1,6 +1,6 @@
-import GoogleProvider from 'next-auth/providers/google'
 import { DrizzleAdapter } from '@auth/drizzle-adapter'
 import { GetServerSidePropsContext } from 'next/types'
+import EmailProvider from 'next-auth/providers/email'
 import type { AuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
 import { Config } from 'sst/node/config'
@@ -8,9 +8,17 @@ import { db } from './index'
 
 const auth: AuthOptions = {
   providers: [
-    GoogleProvider({
-      clientId: Config.GOOGLE_CLIENT_ID,
-      clientSecret: Config.GOOGLE_CLIENT_SECRET,
+    EmailProvider({
+      from: 'kai.yen@mach49.com',
+      server: {
+        host: Config.SMTP_HOST,
+        secure: true,
+        port: Config.SMTP_PORT,
+        auth: {
+          user: Config.SMTP_USER,
+          pass: Config.SMTP_PASS,
+        },
+      },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
@@ -18,9 +26,7 @@ const auth: AuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  pages: {
-    newUser: '/user/new',
-  },
+  pages: {},
 }
 
 export const getServerAuthSession = (ctx: {
