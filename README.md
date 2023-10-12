@@ -11,6 +11,8 @@ This stack provides the basic plumbing to be able to deploy an application quick
 
 ## Requirements
 
+Use `pnpm` as the drizzle-orm package is patched using pnpm's patch function
+
 ## Configuration
 
 - Update name and region in `/sst.config.ts`

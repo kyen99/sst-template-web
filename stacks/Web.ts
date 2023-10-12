@@ -2,12 +2,6 @@ import { StackContext, NextjsSite, Config, use } from 'sst/constructs'
 import { SsrDomainProps } from 'sst/constructs/SsrSite'
 import { Database } from './Database'
 
-/* TODO:
-  - test domain name for prod
-  - generate DATABASE_URL from secretArn
-
-*/
-
 const CUSTOM_DOMAIN: SsrDomainProps = {
   domainName: 'demo.2401.co',
   hostedZone: '2401.co',

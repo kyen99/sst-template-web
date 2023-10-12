@@ -1,14 +1,17 @@
+import { getServerSession } from 'next-auth'
+import auth from '../server/auth'
 import Header from './header'
-
 export const dynamic = 'force-dynamic'
-
-export default async function Home() {
+const App = async () => {
+  const session = await getServerSession(auth)
   return (
-    <main className="flex flex-1 flex-col">
+    <div>
       <Header />
-      <div className="flex w-full flex-1 flex-col items-center justify-center">
-        <div>Sign Up Form</div>
-      </div>
-    </main>
+      <h2>Unprotected Route</h2>
+      <h3>User session</h3>
+      <pre>{JSON.stringify(session, null, 2)}</pre>
+    </div>
   )
 }
+
+export default App

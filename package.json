@@ -17,10 +17,15 @@
     "@types/node": "^18.17.18",
     "aws-cdk-lib": "2.95.1",
     "constructs": "10.2.69",
-    "sst": "2.26.5",
+    "sst": "2.28.5",
     "typescript": "^5.2.2"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "pnpm": {
+    "patchedDependencies": {
+      "drizzle-orm@0.28.6": "patches/drizzle-orm@0.28.6.patch"
+    }
+  }
 }

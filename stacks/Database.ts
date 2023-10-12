@@ -1,5 +1,4 @@
-import { StackContext, RDS, Config } from 'sst/constructs'
-import * as ec2 from 'aws-cdk-lib/aws-ec2'
+import { StackContext, RDS, Service } from 'sst/constructs'
 
 /*
   TODO:
@@ -13,11 +12,20 @@ export const Database = ({ stack }: StackContext) => {
     engine: 'postgresql13.9',
     defaultDatabaseName: 'postgres',
   })
+
+  // const budibase = new Service(stack, 'budibase', {
+  //   path: 'packages/services/budibase',
+  //   architecture: 'x86_64',
+  //   bind: [cluster],
+  //   environment: {},
+  // })
+
   stack.addOutputs({
     dbName: cluster.defaultDatabaseName,
     dbSecretArn: cluster.secretArn,
     dbResourceArn: cluster.clusterArn,
     dbSocketAddress: cluster.clusterEndpoint.socketAddress,
+    // budibase: budibase.url,
   })
 
   return {
